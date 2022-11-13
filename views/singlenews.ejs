@@ -1,0 +1,26 @@
+<%- include('./includes/head.ejs') %>
+<body>
+  <%- include('./includes/navbar.ejs') %>
+
+  <main>
+    <div class="news-container">
+      <header class="news-container-header">
+        <h1><%= news.title %></h1>
+        <div>
+          <p>Author : bharat</p>
+          <p1> <%= news.date %></p1>
+          <img
+            src="<%= news.image %>"
+            alt=""
+            height="300"
+            width="500"
+            class="post-img"
+          />
+        </div>
+      </header>
+      <article class="publish-container"><%= news.content %></article>
+    </div>
+  </main>
+
+  <%- include('./includes/footer.ejs') %>
+</body>
