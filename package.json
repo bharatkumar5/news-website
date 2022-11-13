@@ -2,6 +2,9 @@
   "name": "news-app",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "12.22.9"
+  },
   "scripts": {
     "start": "NODE_ENV=production USERNAMEs=bharatkumar DATABASE_PASSWORD=774226 DATABASE=publication  node ./bin/www.js",
     "start_server": "node ./bin/www",
