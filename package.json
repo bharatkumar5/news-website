@@ -6,9 +6,9 @@
     "node": "12.22.9"
   },
   "scripts": {
-    "start": "NODE_ENV=production USERNAMEs=bharatkumar DATABASE_PASSWORD=774226 DATABASE=publication  node ./bin/www.js",
-    "start_server": "node ./bin/www",
-    "start-dev": "nodemon ./bin/www"
+    "start": "NODE_ENV=production MONGO_USER=bharatkumar MONGO_PASSWORD=774226 MONGO_DEFAULT_DATABASE=publication node ./bin/www",
+    "start-dev": "nodemon ./bin/www",
+    "start-server": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

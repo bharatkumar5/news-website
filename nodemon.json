@@ -1,8 +1,7 @@
 {
   "env": {
-    "USERNAMES": "bharatkumar",
-    "DATABASE_PASSWORD": "774226",
-    "DATABASE": "Publication"
- 
+    "MONGO_USER": "bharatkumar",
+    "MONGO_PASSWORD": "774226",
+    "MONGO_DEFAULT_DATABASE": "publication"
   }
 }
