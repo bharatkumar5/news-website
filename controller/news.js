@@ -2,37 +2,40 @@ const { render } = require("ejs");
 const News = require("../modal/news");
 
 exports.getallnews = (req, res, next) => {
-  News.find().then((doc) => {
-    const tech = doc.filter((el) => {
-      if (el.category === "Technology") {
-        return el;
-      }
-    });
+  News.find()
+    .then((doc) => {
+      const tech = doc.filter((el) => {
+        if (el.category === "Technology") {
+          return el;
+        }
+      });
 
-    const sport = doc.filter((el) => {
-      if (el.category === "Sports") {
-        return el;
-        gi;
-      }
-    });
+      const sport = doc.filter((el) => {
+        if (el.category === "Sports") {
+          return el;
+        }
+      });
 
-    console.log(sport.length);
-    res.render("index.ejs", {
-      title: "express",
-      news: doc,
-      tech: tech,
-      sport: sport,
-    });
-  });
+      console.log(sport.length);
+      res.render("index.ejs", {
+        title: "express",
+        news: doc,
+        tech: tech,
+        sport: sport,
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.getsinglenews = (req, res, next) => {
   const id = req.params.id;
   console.log(id);
-  News.findById(id).then((doc) => {
-    console.log(doc.id);
-    res.render("singlenews.ejs", { title: "single news", news: doc });
-  });
+  News.findById(id)
+    .then((doc) => {
+      console.log(doc.id);
+      res.render("singlenews.ejs", { title: "single news", news: doc });
+    })
+    .catch((err) => console.log(err));
 
   // res.render("singlenews.ejs", { title: "single news" });
 };
