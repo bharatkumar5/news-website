@@ -10,18 +10,31 @@ exports.getallnews = (req, res, next) => {
         }
       });
 
-      const sport = doc.filter((el) => {
+      const Sport = doc.filter((el) => {
         if (el.category === "Sports") {
           return el;
         }
       });
 
-      console.log(sport.length);
+      const Business = doc.filter((el) => {
+        if (el.category === "Business") {
+          return el;
+        }
+      });
+
+      const Entertainment = doc.filter((el) => {
+        if (el.category === "Entertainment") {
+          return el;
+        }
+      });
+
       res.render("index.ejs", {
         title: "express",
         news: doc,
         tech: tech,
-        sport: sport,
+        sport: Sport,
+        Business: Business,
+        Entertainment: Entertainment,
       });
     })
     .catch((err) => console.log(err));
@@ -29,10 +42,9 @@ exports.getallnews = (req, res, next) => {
 
 exports.getsinglenews = (req, res, next) => {
   const id = req.params.id;
-  console.log(id);
+
   News.findById(id)
     .then((doc) => {
-      console.log(doc.id);
       res.render("singlenews.ejs", { title: "single news", news: doc });
     })
     .catch((err) => console.log(err));
@@ -63,14 +75,28 @@ exports.postpublishnews = (req, res, next) => {
     category: category,
     content: content,
   })
-    .then((doc) => {
-      console.log(doc);
-    })
+    .then((doc) => {})
     .catch((err) => console.log("error"));
 
   res.redirect("/");
 };
 
+exports.getbusiness = (req, res, next) => {
+  res.render("newslist.ejs", { title: "Business" });
+};
+
+exports.getentertainment = (req, res, next) => {
+  res.render("newslist.ejs", { title: "Entertainment" });
+};
+
+exports.getsports = (req, res, next) => {
+  res.render("newslist.ejs", { title: "Sports" });
+};
+
 exports.getcontact = (req, res, next) => {
-  res.render("contact.ejs", { title: "contact" });
+  res.render("contact.ejs", { title: "Contact" });
+};
+
+exports.gettechnology = (req, res, next) => {
+  res.render("newslist.ejs", { title: "Technology" });
 };

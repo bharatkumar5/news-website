@@ -159,17 +159,21 @@
           <div class="row cn-slider">
             <div class="col-md-6">
               <div class="cn-img">
-                <img src="img/news-350x223-5.jpg" />
+                <img src="<%= Business[Business.length-1].image%>" />
                 <div class="cn-title">
-                  <a href="">Lorem ipsum dolor sit</a>
+                  <a href="/news/<%= Business[Business.length-1].id%>"
+                    ><%= Business[Business.length-1].title%></a
+                  >
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="cn-img">
-                <img src="img/news-350x223-4.jpg" />
+                <img src="<%= Business[Business.length-2].image%>" />
                 <div class="cn-title">
-                  <a href="">Lorem ipsum dolor sit</a>
+                  <a href="/news/<%= Business[Business.length-2].id%>"
+                    ><%= Business[Business.length-2].title%></a
+                  >
                 </div>
               </div>
             </div>
@@ -188,17 +192,21 @@
           <div class="row cn-slider">
             <div class="col-md-6">
               <div class="cn-img">
-                <img src="img/news-350x223-2.jpg" />
+                <img src="<%= Entertainment[Entertainment.length-1].image%>" />
                 <div class="cn-title">
-                  <a href="">Lorem ipsum dolor sit</a>
+                  <a href="/news/<%= Entertainment[Entertainment.length-1].id%>"
+                    ><%= Entertainment[Entertainment.length-1].title%></a
+                  >
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="cn-img">
-                <img src="img/news-350x223-1.jpg" />
+                <img src="<%= Entertainment[Entertainment.length-2].image%>" />
                 <div class="cn-title">
-                  <a href="">Lorem ipsum dolor sit</a>
+                  <a href="/news/<%= Entertainment[Entertainment.length-2].id%>"
+                    ><%= Entertainment[Entertainment.length-2].title%></a
+                  >
                 </div>
               </div>
             </div>

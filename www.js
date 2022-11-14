@@ -27,7 +27,7 @@ mongoose
  * * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || 4000);
+const port = normalizePort(process.env.PORT || 8080);
 app.set("port", port);
 
 /**
@@ -100,3 +100,5 @@ function onListening() {
   // debug('Listening on ' + bind);
   console.log("Listening on ", bind);
 }
+
+// "start": "NODE_ENV=production MONGO_USER=bharatkumar MONGO_PASSWORD=774226 MONGO_DEFAULT_DATABASE=publication node www.js",
