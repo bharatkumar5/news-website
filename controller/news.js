@@ -29,12 +29,13 @@ exports.getallnews = (req, res, next) => {
       });
 
       res.render("index.ejs", {
-        title: "express",
+        title: "Home",
         news: doc,
         tech: tech,
         sport: Sport,
         Business: Business,
         Entertainment: Entertainment,
+        path: "/",
       });
     })
     .catch((err) => console.log(err));
@@ -45,16 +46,20 @@ exports.getsinglenews = (req, res, next) => {
 
   News.findById(id)
     .then((doc) => {
-      res.render("singlenews.ejs", { title: "single news", news: doc });
+      res.render("singlenews.ejs", {
+        title: "single news",
+        news: doc,
+        path: "/news",
+      });
     })
     .catch((err) => console.log(err));
-
-  // res.render("singlenews.ejs", { title: "single news" });
 };
 
 exports.getpublishnews = (req, res, next) => {
-  res.render("form.ejs", { title: "publish news" });
+  res.render("form.ejs", { title: "publish news", path: "/add-news" });
 };
+
+/// Create news///////////
 
 exports.postpublishnews = (req, res, next) => {
   const title = req.body.title;
@@ -81,22 +86,103 @@ exports.postpublishnews = (req, res, next) => {
   res.redirect("/");
 };
 
+//////category news access/////
+
 exports.getbusiness = (req, res, next) => {
-  res.render("newslist.ejs", { title: "Business" });
+  News.find({ category: "Business" })
+    .sort({ date: "desc" })
+    .then((doc) => {
+      console.log(doc);
+      res.render("newslist.ejs", {
+        title: "business",
+        allnews: doc,
+        path: "/business",
+      });
+    });
 };
 
 exports.getentertainment = (req, res, next) => {
-  res.render("newslist.ejs", { title: "Entertainment" });
+  News.find({ category: "Entertainment" })
+    .sort({ date: "desc" })
+    .then((doc) => {
+      console.log(doc);
+      res.render("newslist.ejs", {
+        title: "Entertainment",
+        allnews: doc,
+        path: "/Entertainment",
+      });
+    });
+};
+
+exports.gethealth = (req, res, next) => {
+  News.find({ category: "Health" })
+    .sort({ date: "desc" })
+    .then((doc) => {
+      console.log(doc);
+      res.render("newslist.ejs", {
+        title: "Health",
+        allnews: doc,
+        path: "/Health",
+      });
+    });
+};
+
+exports.getother = (req, res, next) => {
+  News.find({ category: "Other" })
+    .sort({ date: "desc" })
+    .then((doc) => {
+      console.log(doc);
+      res.render("newslist.ejs", {
+        title: "Other",
+        allnews: doc,
+        path: "/other",
+      });
+    });
+};
+
+exports.getPolitics = (req, res, next) => {
+  News.find({ category: "Politics" })
+    .sort({ date: "desc" })
+    .then((doc) => {
+      console.log(doc);
+      res.render("newslist.ejs", {
+        title: "Politics",
+        allnews: doc,
+        path: "/Politics",
+      });
+    });
 };
 
 exports.getsports = (req, res, next) => {
-  res.render("newslist.ejs", { title: "Sports" });
-};
-
-exports.getcontact = (req, res, next) => {
-  res.render("contact.ejs", { title: "Contact" });
+  News.find({ category: "Sports" })
+    .sort({ date: "desc" })
+    .then((doc) => {
+      console.log(doc);
+      res.render("newslist.ejs", {
+        title: "Sports",
+        allnews: doc,
+        path: "/sports",
+      });
+    });
 };
 
 exports.gettechnology = (req, res, next) => {
-  res.render("newslist.ejs", { title: "Technology" });
+  News.find({ category: "Technology" })
+    .sort({ date: "desc" })
+    .then((doc) => {
+      console.log(doc);
+      res.render("newslist.ejs", {
+        title: "Technology",
+        allnews: doc,
+        path: "/technology",
+      });
+    });
+};
+
+exports.getcontact = (req, res, next) => {
+  res.render("contact.ejs", { title: "Contact", path: "/Contact" });
+};
+
+exports.getabout = (req, res, next) => {
+  res.render("About.ejs", { title: "About", path: "/about" });
 };

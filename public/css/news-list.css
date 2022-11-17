@@ -1,0 +1,56 @@
+.main-div {
+  margin: 50px;
+}
+.main-container {
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 50px;
+  text-align: center;
+  width: 700px;
+  border: 1px solid rgb(156, 156, 156);
+  padding: 5px;
+}
+h1 {
+  text-align: left;
+  font-size: 25px;
+}
+p {
+  font-size: 15px;
+  text-align: justify;
+  margin-left: 10px;
+}
+.storybox {
+  width: 500px;
+  border-top: 5px solid black;
+  display: block;
+}
+
+.img-div {
+  display: flex;
+  width: 500px;
+}
+
+.img {
+  width: 150px;
+  height: 150px;
+}
+.sp {
+  margin-top: 40px;
+}
+
+.btn-div {
+  display: flex;
+  margin-left: 40px;
+  gap: 5px;
+}
+
+.btn {
+  background-color: rgb(10, 10, 10);
+  width: 90px;
+  margin-top: 10px;
+  color: aliceblue;
+}
+.btn:hover {
+  background-color: rgb(253, 84, 84);
+}

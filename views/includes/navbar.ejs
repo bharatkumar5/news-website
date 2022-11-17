@@ -11,10 +11,10 @@
       </div>
       <div class="col-md-6">
         <div class="tb-menu">
-          <a href="">About</a>
+          <a href="/About">About</a>
           <a href="">Privacy</a>
           <a href="">Terms</a>
-          <a href="">Contact</a>
+          <a href="/Contact">Contact</a>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
       <div class="col-lg-6 col-md-4">
         <div class="b-ads">
           <a href="#">
-            <img src="/img/webmain-logo.png" alt="Ads" />
+            <img src="/img/main.png" alt="Ads" />
           </a>
         </div>
       </div>
@@ -70,15 +70,53 @@
         id="navbarCollapse"
       >
         <div class="navbar-nav mr-auto">
-          <a href="/" class="nav-item nav-link active">Home</a>
-          <a href="/business" class="nav-item nav-link">Business</a>
-          <a href="/Entertainment" class="nav-item nav-link">Entertainment</a>
-          <a href="/sports" class="nav-item nav-link">Sports</a>
-          <a href="/technology" class="nav-item nav-link">Technology</a>
+          <a
+            href="/"
+            class="nav-item nav-link <%= path === '/' ? 'active' : '' %>"
+            >Home</a
+          >
+          <a
+            href="/business"
+            class="nav-item nav-link <%= path === '/business' ? 'active' : '' %>"
+            >Business</a
+          >
+          <a
+            href="/Entertainment"
+            class="nav-item nav-link <%= path === '/Entertainment' ? 'active' : '' %>"
+            >Entertainment</a
+          >
+          <a
+            href="/Health"
+            class="nav-item nav-link <%= path === '/Health' ? 'active' : '' %>"
+            >Health</a
+          >
 
-          <!-- <a href="/add-news" class="nav-item nav-link">Publish</a> -->
+          <a
+            href="/Politics"
+            class="nav-item nav-link <%= path === '/Politics' ? 'active' : '' %>"
+            >Politics</a
+          >
+          <a
+            href="/sports"
+            class="nav-item nav-link <%= path === '/sports' ? 'active' : '' %>"
+            >Sports</a
+          >
+          <a
+            href="/technology"
+            class="nav-item nav-link <%= path === '/technology' ? 'active' : '' %>"
+            >Technology</a
+          >
+          <a
+            href="/other"
+            class="nav-item nav-link <%= path === '/other' ? 'active' : '' %>"
+            >Other</a
+          >
 
-          <a href="/contact" class="nav-item nav-link">Contact Us</a>
+          <!-- <a
+            href="/add-news"
+            class="nav-item nav-link <%= path === '/add-news' ? 'active' : '' %>"
+            >Publish</a
+          > -->
         </div>
         <div class="social ml-auto">
           <a href=""><i class="fab fa-twitter"></i></a>

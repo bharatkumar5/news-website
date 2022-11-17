@@ -1,13 +1,56 @@
 
 
 <%- include('./includes/head.ejs') %>
- 
+<link href="css/news-list.css" rel="stylesheet" />
 
 <body>
     <%- include('./includes/navbar.ejs') %>
-<div>
+<div class="main-div">
 
-<h1 style="font-size: 100px;">under development</h1>
+<% if(allnews.length>0){%>
+    <% for (let news of allnews) { %>
+    <div class="main-container">
+        <article class="story-box">
+            
+            <div class="img-div">
+                <div class="img">
+                    <img src="<%=news.image%>" class="img" />
+                    
+                </div>
+                
+                
+                <div>
+                    <p> <a href="/news/<%=news.id%>"><%=news.title%></a></p> 
+                    
+                    <span class="sp">Date: 12/02/2022</span>
+                 
+                <div class="btn-div">
+                <form action="">
+
+
+
+                <button class="btn" type="submit">Delete</button>
+
+                </form>
+                
+                 <a href="" class="btn">Edit</a>
+                </div>
+
+
+                </div>
+                                
+       
+                
+
+
+            </div>
+            
+        </article>
+    </div>
+    <%} %>
+
+
+<%} %>
 
 </div>
     <%- include('./includes/footer.ejs') %>
