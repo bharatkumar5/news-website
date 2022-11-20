@@ -1,7 +1,0 @@
-{
-  "env": {
-    "MONGO_USER": "bharatkumar",
-    "MONGO_PASSWORD": "774226",
-    "MONGO_DEFAULT_DATABASE": "publication"
-  }
-}
