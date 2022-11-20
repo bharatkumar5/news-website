@@ -412,7 +412,7 @@ button.btn:hover {
   display: block;
   width: 100%;
   color: #ffffff;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
   transition: 0.3s;
 }
@@ -1363,31 +1363,3 @@ button.btn:hover {
 }
 
 /* ///////// */
-/* single post style */
-
-.news-container {
-  background-color: hsl(0, 100%, 99%);
-  /* width: 50%; */
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding-left: 200px;
-  padding-right: 200px;
-}
-.news-container-header {
-  display: inline-block;
-  margin-bottom: 40px;
-}
-
-.publish-container {
-  text-align: justify;
-  font-size: 15px;
-  font-weight: bold;
-  font-family: sans-serif;
-}
-
-.post-img {
-  height: 225px;
-  width: 100%;
-}

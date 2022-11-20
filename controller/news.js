@@ -56,7 +56,11 @@ exports.getsinglenews = (req, res, next) => {
 };
 
 exports.getpublishnews = (req, res, next) => {
-  res.render("form.ejs", { title: "publish news", path: "/add-news" });
+  res.render("form.ejs", {
+    title: "publish news",
+    path: "/add-news",
+    editing: false,
+  });
 };
 
 /// Create news///////////
@@ -92,7 +96,6 @@ exports.getbusiness = (req, res, next) => {
   News.find({ category: "Business" })
     .sort({ date: "desc" })
     .then((doc) => {
-      console.log(doc);
       res.render("newslist.ejs", {
         title: "business",
         allnews: doc,
@@ -105,7 +108,6 @@ exports.getentertainment = (req, res, next) => {
   News.find({ category: "Entertainment" })
     .sort({ date: "desc" })
     .then((doc) => {
-      console.log(doc);
       res.render("newslist.ejs", {
         title: "Entertainment",
         allnews: doc,
@@ -118,7 +120,6 @@ exports.gethealth = (req, res, next) => {
   News.find({ category: "Health" })
     .sort({ date: "desc" })
     .then((doc) => {
-      console.log(doc);
       res.render("newslist.ejs", {
         title: "Health",
         allnews: doc,
@@ -131,7 +132,6 @@ exports.getother = (req, res, next) => {
   News.find({ category: "Other" })
     .sort({ date: "desc" })
     .then((doc) => {
-      console.log(doc);
       res.render("newslist.ejs", {
         title: "Other",
         allnews: doc,
@@ -144,7 +144,6 @@ exports.getPolitics = (req, res, next) => {
   News.find({ category: "Politics" })
     .sort({ date: "desc" })
     .then((doc) => {
-      console.log(doc);
       res.render("newslist.ejs", {
         title: "Politics",
         allnews: doc,
@@ -157,7 +156,6 @@ exports.getsports = (req, res, next) => {
   News.find({ category: "Sports" })
     .sort({ date: "desc" })
     .then((doc) => {
-      console.log(doc);
       res.render("newslist.ejs", {
         title: "Sports",
         allnews: doc,
@@ -170,7 +168,6 @@ exports.gettechnology = (req, res, next) => {
   News.find({ category: "Technology" })
     .sort({ date: "desc" })
     .then((doc) => {
-      console.log(doc);
       res.render("newslist.ejs", {
         title: "Technology",
         allnews: doc,
@@ -185,4 +182,46 @@ exports.getcontact = (req, res, next) => {
 
 exports.getabout = (req, res, next) => {
   res.render("About.ejs", { title: "About", path: "/about" });
+};
+
+///editing////
+
+exports.getedit = (req, res, next) => {
+  const editMode = req.query.edit;
+  if (!editMode) {
+    res.redirect("/");
+  }
+
+  const newsId = req.params.newsid;
+  News.findById(newsId).then((doc) => {
+    console.log(doc.date);
+
+    res.render("form.ejs", {
+      title: "editing",
+      path: "/edit-news",
+      editing: editMode,
+      news: doc,
+    });
+  });
+};
+
+exports.postedit = (req, res, next) => {
+  const title = req.body.title;
+  const image = req.body.image;
+  const category = req.body.category;
+  const content = req.body.content;
+  const id = req.body.id;
+
+  News.findById(id)
+    .then((news) => {
+      news.title = title;
+      news.image = image;
+      news.category = category;
+      news.content = content;
+      return news.save();
+    })
+    .then((doc) => {
+      console.log(doc);
+      res.redirect(`/${doc.category}`);
+    });
 };

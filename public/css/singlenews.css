@@ -1,0 +1,47 @@
+/* single post style */
+
+* {
+  /* border-top: 10px solid #1098ad; */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+}
+main {
+  width: auto;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+.news-container {
+  background-color: hsl(0, 100%, 99%);
+  width: auto;
+  margin-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.news-container-header {
+  text-align: left;
+  display: inline-block;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.publish-container {
+  text-align: justify;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.post-img {
+  height: 225px;
+  width: 100%;
+}
