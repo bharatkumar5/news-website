@@ -3,5 +3,6 @@ exports.getsignup = (req, res, next) => {
 };
 
 exports.getlogin = (req, res, next) => {
+  consolog.log("user");
   res.render("User/login.ejs", { title: "login", path: "/users/login" });
 };
