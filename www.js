@@ -1,12 +1,8 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
+const dotenv = require("dotenv");
 const path = require("path");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
+
+dotenv.config({ path: "./.env" });
 const app = require("./app");
 const debug = require("debug")("news-app:server");
 const http = require("http");
@@ -16,8 +12,8 @@ const DBREMOTE = process.env.DATABASE;
 const DBLOCAL = process.env.DATABASE_LOCAL;
 
 mongoose
-  // .connect(mongourl)
-  .connect(DBLOCAL)
+  .connect(mongourl)
+  // .connect(DBLOCAL)
   .then(() => {
     console.log("database connection successful");
   });
@@ -26,7 +22,7 @@ mongoose
  * * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || 4000);
+const port = normalizePort(process.env.PORT || 3000);
 app.set("port", port);
 
 /**

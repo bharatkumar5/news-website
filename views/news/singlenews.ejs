@@ -1,0 +1,107 @@
+<%- include('../includes/head.ejs') %>
+<body>
+  <%- include('../includes/navbar.ejs') %>
+
+  <main>
+    
+      <header class="news-container-header">
+        <h1><%= news.title %></h1>
+        <div>
+          <p>Author : <%= news.author %></p>
+          <p1> <%= news.date %></p1>
+          <img
+            src="<%= news.image %>"
+            alt=""
+            height="300"
+            width="500"
+            class="post-img"
+          />
+        </div>
+      </header>
+      <article class="publish-container"><%= news.content %></article>
+      <hr />
+      <div>
+        <form action="/addcomment" method="post">
+          <div>
+            <textarea class="form-control bcontent" name="content"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="hidden" name="postid" value="<%=news._id%>">
+            <input
+              type="submit"
+              name="Submit"
+              value="comment"
+              class="btn btn-primary form-control"
+            />
+          </div>
+        </form>
+      </div>
+      <hr />
+      <! --- comment section -->
+      
+      <div class="comment-thread">
+        <!-- Comment 1 start -->
+        <h1>Comments Section</h1>
+        <hr />
+
+        <% if (comments.length > 0) { %>
+          <% for (let comment of comments) { %>
+        <details open class="comment" id="comment-1">
+          <a href="#comment-1" class="comment-border-link">
+            <span class="sr-only">Jump to comment-1</span>
+          </a>
+          <summary>
+            <div class="comment-heading">
+             
+              <div class="comment-info">
+                <a href="#" class="comment-author"><%= comment.Name %></a>
+                <p class="m-0"><%=comment.
+                  createdAt.toISOString().slice(0,10)%></p>
+              </div>
+            </div>
+          </summary>
+
+          <div class="comment-body">
+            <p>
+             <%= comment.content%>
+            </p>
+           
+
+          <!--  Reply form start -->
+             <form
+              method="POST"
+              class="reply-form d-none"
+              id="comment-1-reply-form"
+            >
+              <textarea placeholder="Reply to comment" rows="4"></textarea>
+              <button type="submit">Submit</button>
+              <button
+                type="button"
+                data-toggle="reply-form"
+                data-target="comment-1-reply-form"
+              >
+                Cancel
+              </button>
+            </form> 
+            <!-- Reply form end  -->
+          </div>
+
+        </details>
+        <% } %>
+
+        <div>  <a href="?page=<%=comments.length%>">Load more</a></div>
+        <% } 
+        
+        else { %>
+          <h1>No Comments!</h1>
+
+          <% } %>
+        <!-- Comment 1 end -->
+      </div>
+
+
+    </div>
+  </main>
+
+  <%- include('../includes/footer.ejs') %>
+</body>

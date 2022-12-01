@@ -3,9 +3,21 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
+const flash = require("connect-flash");
+const User = require("./modal/user");
+const News = require("./modal/news");
+const Comment = require("./modal/comment");
+// session store instance//
+const store = new MongoDBStore({
+  uri: process.env.DATABASE_LOCAL,
+  collection: "mysession",
+});
 
 const indexRouter = require("./routes/news");
 const usersRouter = require("./routes/users");
+const user = require("./modal/user");
 
 const app = express();
 
@@ -18,6 +30,35 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+//session middleware//
+app.use(
+  session({
+    secret: "mysecret",
+    resave: false,
+    saveUninitialized: true,
+    name: "news-app",
+    store: store,
+  })
+);
+
+app.use(flash());
+
+app.use((req, res, next) => {
+  if (!req.session.user) {
+    return next();
+  }
+  User.findById(req.session.user._id)
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => console.log(err));
+});
+
+app.use((req, res, next) => {
+  res.locals.authenticate = req.session.islogin;
+  next();
+});
 
 app.use(indexRouter);
 app.use("/users", usersRouter);
@@ -37,7 +78,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-console.log(process.argv);
 
 module.exports = app;

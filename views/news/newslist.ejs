@@ -1,10 +1,10 @@
 
 
-<%- include('./includes/head.ejs') %>
+<%- include('../includes/head.ejs') %>
 <link href="css/news-list.css" rel="stylesheet" />
 
 <body>
-    <%- include('./includes/navbar.ejs') %>
+    <%- include('../includes/navbar.ejs') %>
 <div class="main-div">
 
 <% if(allnews.length>0){%>
@@ -13,30 +13,36 @@
         <article class="story-box">
             
             <div class="img-div">
-                <div class="img">
+                
                     <img src="<%=news.image%>" class="img" />
                     
-                </div>
+                
                 
                 
                 <div class="content-div">
                     <p> <a href="/news/<%=news.id%>"><%=news.title%></a></p> 
                     
-                    <span class="sp">Date: <%= news.date%></span>
-                 
+                   
+
+
+                    
+
                 <div class="btn-div">
-                <form action="">
 
 
+                <form action="/delete-news" method="post">
 
+                <input type="hidden" name="newsid" value="<%=news.id%>">
+<% if (authenticate) { %>
                 <button class="btn" type="submit">Delete</button>
-
+  <% } %> 
                 </form>
-                
-                 <a href="/edit-news/<%=news.id%>?edit=true" class="btn">Edit</a>
-
+                <% if (authenticate) { %>
+                <div> <a href="/edit-news/<%=news.id%>?edit=true" class="btn">Edit</a></div>
+               
+                 <% } %> 
                 </div>
-
+ 
 
                 </div>
                                 
@@ -45,7 +51,7 @@
 
 
             </div>
-            
+            <p> <%=news.date%></p>
         </article>
     </div>
     <%} %>
@@ -54,6 +60,6 @@
 <%} %>
 
 </div>
-    <%- include('./includes/footer.ejs') %>
+    <%- include('../includes/footer.ejs') %>
 </body>
 </html>

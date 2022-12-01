@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("../modal/user");
 const Schema = mongoose.Schema;
 const newsschema = new Schema({
   title: {
@@ -18,6 +19,15 @@ const newsschema = new Schema({
     type: String,
     require: true,
   },
+  author: {
+    type: String,
+  },
+  userid: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    require: true,
+  },
+  comments: [{}],
   date: { type: Date, default: Date.now },
 });
 

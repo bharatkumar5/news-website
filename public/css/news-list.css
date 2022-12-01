@@ -28,14 +28,16 @@ p {
 .storybox {
   width: auto;
   border-top: 5px solid black;
-  display: flex;
-  grid-template-columns: 10px;
+  display: block;
+
   /* margin-left: 10%;
   margin-right: 10%; */
 }
 
 .content-div {
   margin-left: 10%;
+  width: auto;
+  margin-bottom: 40%;
 }
 
 .img-div {
@@ -44,8 +46,8 @@ p {
 }
 
 .img {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 80px;
 }
 .sp {
   margin-top: 40px;
@@ -59,7 +61,7 @@ p {
 
 .btn {
   background-color: rgb(10, 10, 10);
-  width: 90px;
+  width: 70px;
   margin-top: 10px;
   color: aliceblue;
 }
