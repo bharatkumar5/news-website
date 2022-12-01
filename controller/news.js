@@ -1,5 +1,7 @@
 const { render } = require("ejs");
 const News = require("../modal/news");
+const User = require("../modal/user");
+const Comment = require("../modal/comment");
 
 exports.getallnews = (req, res, next) => {
   News.find()
@@ -28,7 +30,7 @@ exports.getallnews = (req, res, next) => {
         }
       });
 
-      res.render("index.ejs", {
+      res.render("news/index.ejs", {
         title: "Home",
         news: doc,
         tech: tech,
@@ -43,12 +45,18 @@ exports.getallnews = (req, res, next) => {
 
 exports.getsinglenews = (req, res, next) => {
   const id = req.params.id;
+  let nu = Number(req.query.page);
 
-  News.findById(id)
+  console.log(nu);
+
+  News.findById(id, { comments: { $slice: nu + 2 || 3 } })
     .then((doc) => {
-      res.render("singlenews.ejs", {
+      let comment = doc.comments.reverse();
+      res.render("news/singlenews.ejs", {
         title: "single news",
         news: doc,
+        comments: comment,
+
         path: "/news",
       });
     })
@@ -56,7 +64,7 @@ exports.getsinglenews = (req, res, next) => {
 };
 
 exports.getpublishnews = (req, res, next) => {
-  res.render("form.ejs", {
+  res.render("news/form.ejs", {
     title: "publish news",
     path: "/add-news",
     editing: false,
@@ -77,17 +85,20 @@ exports.postpublishnews = (req, res, next) => {
   //   category: category,
   //   content: content,
   // });
+  let newspost;
 
   News.create({
     title: title,
     image: image,
     category: category,
     content: content,
+    author: req.user.name,
+    userid: req.user,
   })
-    .then((doc) => {})
+    .then((result) => {
+      res.redirect("/other");
+    })
     .catch((err) => console.log("error"));
-
-  res.redirect("/");
 };
 
 //////category news access/////
@@ -96,7 +107,7 @@ exports.getbusiness = (req, res, next) => {
   News.find({ category: "Business" })
     .sort({ date: "desc" })
     .then((doc) => {
-      res.render("newslist.ejs", {
+      res.render("news/newslist.ejs", {
         title: "business",
         allnews: doc,
         path: "/business",
@@ -108,7 +119,7 @@ exports.getentertainment = (req, res, next) => {
   News.find({ category: "Entertainment" })
     .sort({ date: "desc" })
     .then((doc) => {
-      res.render("newslist.ejs", {
+      res.render("news/newslist.ejs", {
         title: "Entertainment",
         allnews: doc,
         path: "/Entertainment",
@@ -120,7 +131,7 @@ exports.gethealth = (req, res, next) => {
   News.find({ category: "Health" })
     .sort({ date: "desc" })
     .then((doc) => {
-      res.render("newslist.ejs", {
+      res.render("news/newslist.ejs", {
         title: "Health",
         allnews: doc,
         path: "/Health",
@@ -132,7 +143,7 @@ exports.getother = (req, res, next) => {
   News.find({ category: "Other" })
     .sort({ date: "desc" })
     .then((doc) => {
-      res.render("newslist.ejs", {
+      res.render("news/newslist.ejs", {
         title: "Other",
         allnews: doc,
         path: "/other",
@@ -144,7 +155,7 @@ exports.getPolitics = (req, res, next) => {
   News.find({ category: "Politics" })
     .sort({ date: "desc" })
     .then((doc) => {
-      res.render("newslist.ejs", {
+      res.render("news/newslist.ejs", {
         title: "Politics",
         allnews: doc,
         path: "/Politics",
@@ -156,7 +167,7 @@ exports.getsports = (req, res, next) => {
   News.find({ category: "Sports" })
     .sort({ date: "desc" })
     .then((doc) => {
-      res.render("newslist.ejs", {
+      res.render("news/newslist.ejs", {
         title: "Sports",
         allnews: doc,
         path: "/sports",
@@ -168,7 +179,7 @@ exports.gettechnology = (req, res, next) => {
   News.find({ category: "Technology" })
     .sort({ date: "desc" })
     .then((doc) => {
-      res.render("newslist.ejs", {
+      res.render("news/newslist.ejs", {
         title: "Technology",
         allnews: doc,
         path: "/technology",
@@ -196,7 +207,7 @@ exports.getedit = (req, res, next) => {
   News.findById(newsId).then((doc) => {
     console.log(doc.date);
 
-    res.render("form.ejs", {
+    res.render("news/form.ejs", {
       title: "editing",
       path: "/edit-news",
       editing: editMode,
@@ -212,8 +223,11 @@ exports.postedit = (req, res, next) => {
   const content = req.body.content;
   const id = req.body.id;
 
-  News.findById(id)
+  News.findOne({ _id: id, userid: req.user._id })
     .then((news) => {
+      if (!news) {
+        res.redirect("/");
+      }
       news.title = title;
       news.image = image;
       news.category = category;
@@ -223,5 +237,51 @@ exports.postedit = (req, res, next) => {
     .then((doc) => {
       console.log(doc);
       res.redirect(`/${doc.category}`);
+    })
+    .catch((err) => console.log(err));
+};
+
+//// deleting///
+
+exports.Postdelete = (req, res, next) => {
+  const newsid = req.body.newsid;
+  console.log(req.user._id);
+
+  News.deleteOne({ _id: newsid, userid: req.user._id })
+    .then((result) => {
+      console.log(result);
+      res.redirect("/other");
+    })
+    .catch((err) => console.log(err));
+};
+
+///comment/
+
+exports.postcomment = (req, res, next) => {
+  const content = req.body.content;
+  const name = req.user.name;
+  const postid = req.body.postid;
+  let comment;
+  Comment.create({
+    Userid: req.user._id,
+    Name: name,
+    Postid: postid,
+    content: content,
+  })
+    .then((doc) => {
+      comment = doc;
+      return News.findById(postid);
+    })
+    .then((post) => {
+      console.log(post);
+      post.comments.push(comment);
+      return post.save();
+    })
+    .then((result) => {
+      console.log(result);
+      res.redirect(`/news/${postid}`);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
