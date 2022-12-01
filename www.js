@@ -17,7 +17,7 @@ const DBLOCAL = process.env.DATABASE_LOCAL;
 const mongourl = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.qapkskq.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
 mongoose
-  .connect(mongourl)
+  .connect(DBREMOTE)
   // .connect(DBLOCAL)
   .then(() => {
     console.log("database connection successful");
@@ -27,7 +27,7 @@ mongoose
  * * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || 3000);
+const port = normalizePort(process.env.PORT || 9000);
 app.set("port", port);
 
 /**
