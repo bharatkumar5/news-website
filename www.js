@@ -3,9 +3,10 @@
 /**
  * Module dependencies.
  */
+const dotenv = require("dotenv");
 const path = require("path");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+
 dotenv.config({ path: "./config.env" });
 const app = require("./app");
 const debug = require("debug")("news-app:server");
