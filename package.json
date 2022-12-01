@@ -7,7 +7,8 @@
     "node": "18.12.1"
   },
   "scripts": {
-    "start": "nodemon www.js",
+    "start": "NODE_ENV=production MONGO_USER=bharatkumar MONGO_PASSWORD=774226 MONGO_DEFAULT_DATABASE=publication",
+    "start-dev": "nodemon www.js",
     "start-server": "node www.js"
   },
   "dependencies": {
