@@ -20,7 +20,7 @@ const DBLOCAL = process.env.DATABASE_LOCAL;
 const mongourl = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.qapkskq.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
 mongoose
-  .connect(Db)
+  .connect(mongourl)
   // .connect(DBLOCAL)
   .then(() => {
     console.log("database connection successful");
