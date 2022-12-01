@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 
 const mongoose = require("mongoose");
 
-dotenv.config({ path: "./.env" });
+dotenv.config({ path: "./confi.env" });
 const app = require("./app");
 const debug = require("debug")("news-app:server");
 const http = require("http");
