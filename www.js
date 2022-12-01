@@ -1,5 +1,6 @@
-const dotenv = require("dotenv");
 const path = require("path");
+const dotenv = require("dotenv");
+
 const mongoose = require("mongoose");
 
 dotenv.config({ path: "./.env" });
@@ -12,7 +13,7 @@ const DBREMOTE = process.env.DATABASE;
 const DBLOCAL = process.env.DATABASE_LOCAL;
 
 mongoose
-  .connect(DBLOCAL)
+  .connect(DBREMOTE)
   // .connect(DBLOCAL)
   .then(() => {
     console.log("database connection successful");
