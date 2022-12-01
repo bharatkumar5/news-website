@@ -1,8 +1,12 @@
-const dotenv = require("dotenv");
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
 const path = require("path");
 const mongoose = require("mongoose");
-
-dotenv.config({ path: "./.env" });
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
 const app = require("./app");
 const debug = require("debug")("news-app:server");
 const http = require("http");
@@ -10,10 +14,10 @@ const http = require("http");
 //DataBase connection Setup//
 const DBREMOTE = process.env.DATABASE;
 const DBLOCAL = process.env.DATABASE_LOCAL;
-const mongourl = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.qapkskq.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
+const mongourl = `mongodb+srv://bharatkumar:774226@cluster0.qapkskq.mongodb.net/publication`;
 
 mongoose
-  .connect(DBREMOTE)
+  .connect(mongourl)
   // .connect(DBLOCAL)
   .then(() => {
     console.log("database connection successful");
@@ -23,7 +27,7 @@ mongoose
  * * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || 2000);
+const port = normalizePort(process.env.PORT || 8080);
 app.set("port", port);
 
 /**
