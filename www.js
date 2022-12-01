@@ -12,7 +12,7 @@ const DBREMOTE = process.env.DATABASE;
 const DBLOCAL = process.env.DATABASE_LOCAL;
 
 mongoose
-  .connect(mongourl)
+  .connect(DBLOCAL)
   // .connect(DBLOCAL)
   .then(() => {
     console.log("database connection successful");
@@ -22,7 +22,7 @@ mongoose
  * * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || 3000);
+const port = normalizePort(process.env.PORT || 2000);
 app.set("port", port);
 
 /**
