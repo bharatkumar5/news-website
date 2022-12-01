@@ -1,8 +1,12 @@
-const dotenv = require("dotenv");
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
 const path = require("path");
 const mongoose = require("mongoose");
-
-dotenv.config({ path: "./.env" });
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
 const app = require("./app");
 const debug = require("debug")("news-app:server");
 const http = require("http");
@@ -23,7 +27,7 @@ mongoose
  * * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || 4000);
+const port = normalizePort(process.env.PORT || 8080);
 app.set("port", port);
 
 /**
