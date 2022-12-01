@@ -26,6 +26,6 @@ router.get("/edit-news/:newsid", isauth, newscontroller.getedit);
 router.post("/edit-news", isauth, newscontroller.postedit);
 router.post("/delete-news", isauth, newscontroller.Postdelete);
 //comment //
-router.post("/addcomment", newscontroller.postcomment);
+router.post("/addcomment", isauth, newscontroller.postcomment);
 
 module.exports = router;
