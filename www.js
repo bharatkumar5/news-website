@@ -1,8 +1,3 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
 const dotenv = require("dotenv");
 const path = require("path");
 const mongoose = require("mongoose");
