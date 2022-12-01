@@ -4,9 +4,7 @@
   "private": true,
   "main": "www.js",
   "engines": {
-    "node": "18.12.1",
-    "npm":"8.19.2"
-    
+    "node": "12.22.9"
   },
   "scripts": {
     "start": "nodemon www.js",
