@@ -9,9 +9,11 @@ const flash = require("connect-flash");
 const User = require("./modal/user");
 const News = require("./modal/news");
 const Comment = require("./modal/comment");
+
+const mongo = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.qapkskq.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 // session store instance//
 const store = new MongoDBStore({
-  uri:`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.qapkskq.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`,
+  uri: mongo,
   collection: "mysession",
 });
 
