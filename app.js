@@ -11,7 +11,7 @@ const News = require("./modal/news");
 const Comment = require("./modal/comment");
 // session store instance//
 const store = new MongoDBStore({
-  uri: process.env.DATABASE_LOCAL,
+  uri:`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.qapkskq.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`,
   collection: "mysession",
 });
 
@@ -40,6 +40,10 @@ app.use(
     store: store,
   })
 );
+
+store.on("error", function (error) {
+  console.log(error);
+});
 
 app.use(flash());
 
