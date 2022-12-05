@@ -1,1 +1,3 @@
 node_modules
+confi.env
+nodemon.json
