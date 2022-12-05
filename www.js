@@ -7,7 +7,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 
 const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: "./confi.env" });
 
 const app = require("./app");
 
@@ -30,7 +30,7 @@ mongoose
  * * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || 9000);
+const port = normalizePort(process.env.PORT || 4000);
 app.set("port", port);
 
 /**
